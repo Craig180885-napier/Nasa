@@ -36,22 +36,11 @@ namespace Nasa
 
         }
 
-        public async void apiGet()
+        public object apiGet()
         {
-            //Console.WriteLine("Response : ");
-
-            //var http = new HttpClient();
-            //var response = await http.GetAsync("https://api.nasa.gov/planetary/apod");
-            //Console.WriteLine("response : ", response.Content);
-            //Console.ReadLine();
+      
             string api_key = "?api_key=6ZbHnqwSkpG3K2ObjcoPc85J7C3lWCp0aDAV8Xon";
-            //var client = new RestClient("https://api.nasa.gov/");
-            //var request = new RestRequest("planetary/apod" + api_key);
-            //var response = await client.GetAsync(request);
-
-            //Console.WriteLine("Response : " + response.StatusCode);
-            //Console.ReadLine();
-
+      
             var printResponseBody = new RestAssured()
                  .Given()
                  .Name("Nasa Test")
@@ -69,16 +58,17 @@ namespace Nasa
                  .Retrieve(x => x.title);
 
             var picOfTheDayUrl = new RestAssured()
-            .Given()
-            .Name("Nasa Test")
-            .When()
-            .Get("https://api.nasa.gov/planetary/apod" + api_key)
-            .Then()
-            .Retrieve(x => x.url);
+                .Given()
+                .Name("Nasa Test")
+                .When()
+                .Get("https://api.nasa.gov/planetary/apod" + api_key)
+                .Then()
+                .Retrieve(x => x.url);
 
             Console.WriteLine("The pick of the day is :  " + picOfTheDayTitle);
             Console.WriteLine("The pick of the day url is :  " + picOfTheDayUrl);
 
+            return picOfTheDayUrl;
         }
 
         
